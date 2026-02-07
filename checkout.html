@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="keywords" content="Chemical Industry">
+    <meta name="subject" content="Chemicals">
+    <meta name="copyright" content="Devish Ingredients">
+    <meta name="language" content="English">
+    <meta name="robots" content="index,follow">
+    <meta name="revised" content="saturday,Feb 8th,2026,8:45 pm">
+    <meta name="abstract" content="HarshTech  specializes in custom Software Development and Web design solutions.">
+    <meta name="topic" content="Software Development">
+    <meta name="summary" content="HarshTech Provides innovative technology solutions for business">
+    <meta name="classification" content="business">
+    <meta name="author" content="Harshad Teli">
+    <meta name="author" content="harshadteli697@gmail.com">
+    <meta name="designer" content="Harshad Teli">
+    <meta name="reply-to" content="harshtech417@gmail.com">
+    <meta name="owner" content="Devish Ingredients">
+    <meta name="directory" content="Technology">
+    <meta name="pagename" content="Devish Ingredients Privated Limited">
+    <meta name="category" content="Web Development">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <link rel="shortcut icon" href="./IMAES/logo.png" type="image/x-icon">
+    <!-- Open Graph Tags (Whatsapp,Facebook,twitter,Instagram,Linkdin) -->
+    <meta name="og:title" content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="og:type" content="Chemical Industry">
+    <meta name="og:url" content="https://devishchemicals.vercel.app">
+    <meta name="og:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <meta name="og:site_name" content="Devish Ingredients">
+    <!-- For the twitter Card -->
+    <meta name="twitter:Card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="twitter:description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <title>Checkout | Devish Ingredients</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 10002;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid #10b981;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Molecular Loader */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10001;
+        }
+
+        .molecule-container {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .atom {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        .atom-center {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            box-shadow: 0 0 30px var(--primary);
+            z-index: 2;
+            animation: pulse-center 2s infinite ease-in-out;
+        }
+
+        .atom-orbit {
+            animation: orbit 3s infinite linear;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .atom-1 {
+            background: #4f46e5;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px #4f46e5;
+        }
+
+        .atom-2 {
+            background: #7c3aed;
+            bottom: 10%;
+            left: 0;
+            box-shadow: 0 0 20px #7c3aed;
+        }
+
+        .atom-3 {
+            background: #10b981;
+            bottom: 10%;
+            right: 0;
+            box-shadow: 0 0 20px #10b981;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-center {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .loading-text-adv {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .loading-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .loading-sub {
+            font-size: 0.9rem;
+            color: #64748b;
+            animation: fadeText 1.5s infinite;
+        }
+
+        @keyframes fadeText {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Modern Molecular Loader -->
+    <div id="orderLoader" class="loader-overlay">
+        <div class="molecule-container">
+            <div class="atom atom-center"></div>
+            <div class="atom-orbit">
+                <div class="atom atom-1"></div>
+                <div class="atom atom-2"></div>
+                <div class="atom atom-3"></div>
+            </div>
+        </div>
+        <div class="loading-text-adv">
+            <div class="loading-title">Processing Your Order</div>
+            <div class="loading-sub">Securing your ingredients, please wait...</div>
+        </div>
+    </div>
+
+    <div id="checkoutToast" class="toast">
+        <i data-lucide="check-circle" style="color: #10b981;"></i>
+        <div>
+            <div style="font-weight: 700; color: #0f172a;">Success!</div>
+            <div style="font-size: 0.85rem; color: #64748b;">Order placed! A detailed bill has been send to your mail.
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div>
+                Global B2B Partner • ISO 9001:2015 Certified
+            </div>
+            <div class="top-bar-links">
+                <a href="support.html">Support</a>
+                <a href="careers.html">Careers</a>
+                <a href="locations.html">Global Locations</a>
+            </div>
+        </div>
+    </div>
+
+    <!--  Navbar  Section  -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Devish Logo" height="50px">
+                    <div>
+                        <span class="logo-main">DEVISH <span style="color:var(--primary)">.</span></span>
+                        <span class="logo-sub">Ingredients & Chemicals</span>
+                    </div>
+                </a>
+
+                <!-- Search -->
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search by CAS #, Product name, or Formula...">
+                </div>
+
+                <!-- Actions -->
+                <div class="nav-actions">
+                    <div class="action-item">
+                        <div class="action-icon-box"><i data-lucide="user"></i></div>
+                        <span>Account</span>
+                    </div>
+                    <a href="ai-assistant.html" class="action-item" style="text-decoration: none; color: inherit;">
+                        <div class="action-icon-box"><i data-lucide="bot"></i></div>
+                        <span>AI Assistant</span>
+                    </a>
+                    <a href="contact.html" class="action-item">
+                        <div class="action-icon-box"><i data-lucide="file-text"></i></div>
+                        <span>Quotes</span>
+                    </a>
+                    <a href="my-orders.html" class="action-item" id="myOrdersLink" style="display: none;">
+                        <div class="action-icon-box"><i data-lucide="package"></i></div>
+                        <span>My Orders</span>
+                    </a>
+                    <a href="cart.html" class="action-item">
+                        <div class="action-icon-box"><i data-lucide="shopping-cart"></i><span class="badge">0</span>
+                        </div>
+                        <span>Cart</span>
+                    </a>
+                    <a href="admin/login.html" class="action-item admin-only" title="Admin Login">
+                        <div class="action-icon-box"><i data-lucide="shield-check"></i></div>
+                        <span>Admin</span>
+                    </a>
+                    <div class="menu-toggle" id="menuToggle"><i data-lucide="menu"></i></div>
+                </div>
+            </div>
+
+            <!-- Categories Nav -->
+            <ul class="cat-nav">
+                <li><a href="index.html" class="cat-link">Home</a></li>
+                <li><a href="profile.html" class="cat-link">Company Profile</a></li>
+                <li><a href="products.html" class="cat-link">Products & Services</a></li>
+                <li><a href="my-orders.html" class="cat-link guest-hide" style="display: none;">My Orders</a></li>
+                <li><a href="about.html" class="cat-link">About Developer</a></li>
+                <li><a href="contact.html" class="cat-link">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Checkout -->
+    <section class="section-padding">
+        <div class="container">
+            <h1 style="margin-bottom: 2rem;">Checkout</h1>
+
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem;" id="checkout-grid">
+                <!-- Billing Form -->
+                <div>
+                    <div class="glass" style="padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1.5rem;">Billing Information</h3>
+                        <form id="checkoutForm">
+                            <!-- Hidden fields removed as JS handles it -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">First
+                                        Name</label>
+                                    <input type="text" name="firstName" required class="search-input"
+                                        style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Last
+                                        Name</label>
+                                    <input type="text" name="lastName" required class="search-input"
+                                        style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Company
+                                    Name</label>
+                                <input type="text" name="company" required class="search-input"
+                                    style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Address</label>
+                                <input type="text" name="address" required class="search-input"
+                                    style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <label
+                                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">City</label>
+                                    <input type="text" name="city" required class="search-input"
+                                        style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Postal
+                                        Code</label>
+                                    <input type="text" name="zip" required class="search-input"
+                                        style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem;">Phone</label>
+                                <input type="tel" name="phone" required class="search-input"
+                                    style="border-radius: 8px; padding: 0.8rem; width: 100%;">
+                            </div>
+                            <!-- Payment moved inside form -->
+                            <div style="padding: 1rem 0; border-top: 1px solid #eee;">
+                                <h3 style="margin-bottom: 1.5rem; font-size: 1rem;">Payment Method</h3>
+                                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                    <label class="glass"
+                                        style="padding: 1rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 1rem; background: white;">
+                                        <input type="radio" name="payment" value="bank" checked>
+                                        <span>Bank Transfer / Net Banking</span>
+                                    </label>
+                                    <label class="glass"
+                                        style="padding: 1rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 1rem; background: white;">
+                                        <input type="radio" name="payment" value="credit">
+                                        <span>Credit Terms (30 Days)</span>
+                                    </label>
+                                    <label class="glass"
+                                        style="padding: 1rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 1rem; background: white;">
+                                        <input type="radio" name="payment" value="cod">
+                                        <span>Cash on Delivery</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div>
+                        <div class="glass" style="padding: 2rem; border-radius: 16px; position: sticky; top: 100px;">
+                            <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
+
+                            <div id="order-items" style="max-height: 300px; overflow-y: auto; margin-bottom: 1.5rem;">
+                                <!-- Items -->
+                            </div>
+
+                            <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-dim);">
+                                    <span>Subtotal</span>
+                                    <span id="checkout-subtotal">₹0.00</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-dim);">
+                                    <span>GST (18%)</span>
+                                    <span id="checkout-tax">₹0.00</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; margin-top: 1rem; color: var(--text-light);">
+                                    <span>Total</span>
+                                    <span id="checkout-total">₹0.00</span>
+                                </div>
+                            </div>
+
+                            <button id="place-order-btn" class="btn btn-primary"
+                                style="width: 100%; margin-top: 2rem; padding: 1rem;">
+                                Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <script src="config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/audio-helper.js"></script>
+    <script>
+        // Check if logged in
+        if (!AuthSystem.isLoggedIn()) {
+            window.location.href = 'login.html';
+        }
+
+        // Render order summary
+        const cart = CartSystem.getCart();
+        if (cart.length === 0) {
+            window.location.href = 'cart.html';
+        }
+
+        const orderItemsDiv = document.getElementById('order-items');
+        orderItemsDiv.innerHTML = cart.map(item => `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9;">
+                <div>
+                    <div style="font-weight: 600; color: var(--text-light);">${item.name}</div>
+                    <div style="font-size: 0.85rem; color: var(--text-dim);">Qty: ${item.quantity} ${item.unit || ''}</div>
+                </div>
+                <div style="font-weight: 600; color: var(--text-light);">₹${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+        `).join('');
+
+        const subtotal = CartSystem.getTotal();
+        const tax = subtotal * 0.18;
+        const total = subtotal + tax;
+
+        document.getElementById('checkout-subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+        document.getElementById('checkout-tax').textContent = `₹${tax.toFixed(2)}`;
+        document.getElementById('checkout-total').textContent = `₹${total.toFixed(2)}`;
+
+        // Place order
+        document.getElementById('place-order-btn').addEventListener('click', async () => {
+            const form = document.getElementById('checkoutForm');
+            if (form.checkValidity()) {
+                const btn = document.getElementById('place-order-btn');
+                btn.innerHTML = 'Processing...';
+                btn.disabled = true;
+
+                // Collect Data
+                const user = AuthSystem.getCurrentUser();
+                const formData = new FormData(form);
+                const orderData = {
+                    userId: user.id, // Assuming user ID is available or just store user email/info
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    company: formData.get('company'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    zip: formData.get('zip'),
+                    phone: formData.get('phone'),
+                    payment: formData.get('payment'),
+                    total: total.toFixed(2),
+                    cart: cart
+                };
+
+                // Show Advanced Loader
+                const loader = document.getElementById('orderLoader');
+                loader.style.display = 'flex';
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.opacity = '1', 10);
+
+                try {
+                    // Artificial delay for user experience as requested
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+
+                    const result = await ApiClient.call('submitOrder', orderData);
+
+                    if (result.success) {
+                        await AudioHelper.play('order.mp3');
+
+                        // Update Loader to Success State
+                        const loaderTitle = document.querySelector('.loading-title');
+                        const loaderSub = document.querySelector('.loading-sub');
+                        const molecule = document.querySelector('.molecule-container');
+
+                        loaderTitle.innerHTML = '<span style="color: #10b981;">Order Placed Successfully!</span>';
+                        loaderSub.textContent = 'A detailed bill has been sent to your email.';
+
+                        // Optional: stop animation or pulse different color
+                        molecule.style.animation = 'none';
+                        document.querySelector('.atom-center').style.background = '#10b981';
+                        document.querySelector('.atom-center').style.boxShadow = '0 0 40px #10b981';
+
+                        CartSystem.clearCart();
+
+                        setTimeout(() => {
+                            document.getElementById('orderLoader').style.display = 'none';
+                            window.location.href = 'index.html';
+                        }, 4000); // Give user 4 seconds to read the confirmation
+                    } else {
+                        loader.style.display = 'none';
+                        alert('Order failed: ' + result.message);
+                        btn.innerHTML = 'Place Order';
+                        btn.disabled = false;
+                    }
+                } catch (e) {
+                    loader.style.display = 'none';
+                    console.error(e);
+                    alert('Network error during checkout.');
+                    btn.innerHTML = 'Place Order';
+                    btn.disabled = false;
+                }
+
+            } else {
+                form.reportValidity();
+            }
+        });
+
+        // Responsive
+        const mediaQuery = window.matchMedia('(max-width: 968px)');
+        function handleResponsive(e) {
+            const grid = document.getElementById('checkout-grid');
+            if (e.matches) {
+                grid.style.gridTemplateColumns = '1fr';
+            } else {
+                grid.style.gridTemplateColumns = '1.5fr 1fr';
+            }
+        }
+        mediaQuery.addListener(handleResponsive);
+        handleResponsive(mediaQuery);
+
+        lucide.createIcons();
+    </script>
+    <!-- Footer -->
+    <footer style="background: #020617; color: white; padding: 4rem 0 2rem 0; margin-top: auto;">
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <!-- Brand -->
+                <div>
+                    <div class="logo" style="margin-bottom: 1.5rem;">
+                        <span class="logo-main" style="color:white; font-size: 1.5rem;">DEVISH <span
+                                style="color:var(--primary)">.</span></span>
+                    </div>
+                    <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">
+                        High-purity chemical manufacturing for the modern world. ISO 9001 certified.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.2rem;">Quick Links</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.95rem;">
+                        <li><a href="index.html" style="color: #94a3b8;">Home</a></li>
+                        <li><a href="products.html" style="color: #94a3b8;">Products</a></li>
+                        <li><a href="profile.html" style="color: #94a3b8;">About Us</a></li>
+                        <li><a href="contact.html" style="color: #94a3b8;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.2rem;">Products</h4>
+                    <ul style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.95rem;">
+                        <li><a href="products.html?cat=yeast_enzymes" style="color: #94a3b8;">Yeast & Enzymes</a></li>
+                        <li><a href="products.html?cat=tech_solutions" style="color: #94a3b8;">Tech Solutions</a></li>
+                        <li><a href="products.html?cat=equipments" style="color: #94a3b8;">Equipments & Instruments</a>
+                        </li>
+                        <li><a href="products.html?cat=manpower" style="color: #94a3b8;">Man Power Supply</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 style="color: white; margin-bottom: 1.2rem;">Contact</h4>
+                    <div
+                        style="color: #94a3b8; font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                        <div>Floor 3rd, Flat No. 301, B Wing Pushpanjali Residency, Phase 2, Vedant Road, Energia Gym,
+                            Thane West,Thane - 400615, Maharashtra, India</div>
+                        <div>+91 7507082555</div>
+                        <div>devish.ingrdients@gmail.com</div>
+                    </div>
+
+                    <!-- Social Media Icons -->
+                    <div style="margin-top: 2rem;">
+                        <h4 style="color: white; margin-bottom: 1rem; font-size: 1rem;">Follow Us</h4>
+                        <div style="display: flex; gap: 0.8rem;">
+                            <a href="https://linkedin.com" target="_blank" rel="noopener"
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;"
+                                onmouseover="this.style.background='#0077b5'; this.style.transform='translateY(-3px)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                                <i data-lucide="linkedin" size="20"></i>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener"
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;"
+                                onmouseover="this.style.background='#1da1f2'; this.style.transform='translateY(-3px)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                                <i data-lucide="twitter" size="20"></i>
+                            </a>
+                            <a href="https://facebook.com" target="_blank" rel="noopener"
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;"
+                                onmouseover="this.style.background='#1877f2'; this.style.transform='translateY(-3px)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                                <i data-lucide="facebook" size="20"></i>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" rel="noopener"
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;"
+                                onmouseover="this.style.background='linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)'; this.style.transform='translateY(-3px)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                                <i data-lucide="instagram" size="20"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@DevishAccount-q3x" target="_blank" rel="noopener"
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;"
+                                onmouseover="this.style.background='#ff0000'; this.style.transform='translateY(-3px)'"
+                                onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                                <i data-lucide="youtube" size="20"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: #64748b; font-size: 0.9rem;">
+                <div>&copy; 2025 Devish Ingredients. All rights reserved.</div>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="privacy-policy.html" style="color: #94a3b8;">Privacy Policy</a>
+                    <a href="terms-conditions.html" style="color: #94a3b8;">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

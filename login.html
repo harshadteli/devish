@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="keywords" content="Chemical Industry">
+    <meta name="subject" content="Chemicals">
+    <meta name="copyright" content="Devish Ingredients">
+    <meta name="language" content="English">
+    <meta name="robots" content="index,follow">
+    <meta name="revised" content="saturday,Feb 8th,2026,8:45 pm">
+    <meta name="abstract" content="HarshTech  specializes in custom Software Development and Web design solutions.">
+    <meta name="topic" content="Software Development">
+    <meta name="summary" content="HarshTech Provides innovative technology solutions for business">
+    <meta name="classification" content="business">
+    <meta name="author" content="Harshad Teli">
+    <meta name="author" content="harshadteli697@gmail.com">
+    <meta name="designer" content="Harshad Teli">
+    <meta name="reply-to" content="harshtech417@gmail.com">
+    <meta name="owner" content="Devish Ingredients">
+    <meta name="directory" content="Technology">
+    <meta name="pagename" content="Devish Ingredients Privated Limited">
+    <meta name="category" content="Web Development">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <link rel="shortcut icon" href="./IMAES/logo.png" type="image/x-icon">
+    <!-- Open Graph Tags (Whatsapp,Facebook,twitter,Instagram,Linkdin) -->
+    <meta name="og:title" content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="og:type" content="Chemical Industry">
+    <meta name="og:url" content="https://devishchemicals.vercel.app">
+    <meta name="og:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <meta name="og:site_name" content="Devish Ingredients">
+    <!-- For the twitter Card -->
+    <meta name="twitter:Card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="twitter:description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <title>Login | Devish Ingredients</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/audio-helper.js"></script>
+    <style>
+        :root {
+            --google-blue: #1a73e8;
+            --google-red: #ea4335;
+            --google-text: #202124;
+            --google-gray: #5f6368;
+            --google-border: #dadce0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--google-text);
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border: 1px solid var(--google-border);
+            border-radius: 8px;
+            padding: 48px 40px 36px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .logo-box {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--google-text);
+        }
+
+        .auth-title {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--google-text);
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .google-input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid var(--google-border);
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .google-input:focus {
+            border: 2px solid var(--google-blue);
+            padding: 12px 14px;
+        }
+
+        .btn-google {
+            background: var(--google-blue);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            float: right;
+        }
+
+        .btn-google:hover {
+            background: #1765cc;
+        }
+
+        .btn-google:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
+            color: var(--google-red);
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .footer-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--google-gray);
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-text {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-card">
+        <div class="logo-box">
+            <img src="https://github.com/harshadteli/devish/blob/main/1769434756823.png?raw=true" alt="Devish Logo"
+                style="height: 60px; margin-bottom: 8px;">
+        </div>
+
+        <h1 class="auth-title">Welcome back</h1>
+        <p class="auth-subtitle">Use your Devish Account</p>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" class="google-input" placeholder="Email" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" class="google-input" placeholder="Password" required>
+                <div style="text-align: right; margin-top: 8px;">
+                    <a href="forgot-password.html"
+                        style="color: var(--google-blue); font-size: 14px; font-weight: 500; text-decoration: none;">Forgot
+                        password?</a>
+                </div>
+            </div>
+
+            <div id="error-message" class="error-msg" style="margin-bottom: 20px;"></div>
+
+            <div style="margin-top: 40px; overflow: hidden;">
+                <a href="register.html"
+                    style="color: var(--google-blue); font-size: 14px; font-weight: 500; text-decoration: none; display: inline-block; margin-top: 10px;">Create
+                    account</a>
+                <button type="submit" id="loginBtn" class="btn-google">
+                    <span class="btn-text">
+                        <div class="spinner" id="loginSpin"></div> Login
+                    </span>
+                </button>
+            </div>
+        </form>
+
+        <!-- <div
+            style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid var(--google-border); font-size: 13px;">
+            <p style="margin: 0 0 5px; font-weight: 500;">Demo Access:</p>
+            <p style="margin: 0; color: var(--google-gray);">client@test.com / client123</p>
+            <p style="margin: 0; color: var(--google-gray);">admin@devish.com / admin123</p>
+        </div> -->
+
+        <div class="footer-links">
+            <div style="display: flex; gap: 15px;">
+                <a href="privacy-policy.html">Privacy</a>
+                <a href="terms-conditions.html">Terms</a>
+            </div>
+            <span>Devish Ingredients</span>
+        </div>
+    </div>
+
+    <script>
+        // Auto-fill email from query param
+        const urlParams = new URLSearchParams(window.location.search);
+        const emailParam = urlParams.get('email');
+        if (emailParam) {
+            document.getElementById('email').value = emailParam;
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const spin = document.getElementById('loginSpin');
+            const errorDiv = document.getElementById('error-message');
+
+            errorDiv.style.display = 'none';
+            btn.disabled = true;
+            spin.style.display = 'block';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const result = await AuthSystem.login(email, password);
+                if (result.success) {
+                    await AudioHelper.play('login.mp3');
+                    if (result.role === 'admin') {
+                        window.location.href = 'admin/index.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
+                } else {
+                    errorDiv.textContent = result.message;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = "Login failed. Check your connection.";
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                spin.style.display = 'none';
+            }
+        });
+
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

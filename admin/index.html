@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Devish Ingredients</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --sidebar-bg: #0f172a;
+        }
+
+        /* Admin Layout & Responsiveness */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            background: #f8fafc;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #0f172a;
+            color: white;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+            background: #f8fafc;
+            width: 100%;
+            transition: margin-left 0.3s ease;
+        }
+
+        .mobile-header {
+            display: none;
+            background: white;
+            padding: 0.75rem 1.25rem;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 45;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 968px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .stat-card {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+        }
+
+        #report-header {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            color: #0f172a;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-green {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        .theme-blue {
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        .theme-purple {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        .theme-slate {
+            background: #f8fafc;
+            color: #64748b;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Data Tables */
+        .data-table-container {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f8fafc;
+            color: #334155;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        /* Sections */
+        .section-view {
+            display: none;
+        }
+
+        .section-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Tables */
+        @media (max-width: 768px) {
+            .data-table-container {
+                padding: 1rem;
+            }
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+                background: white;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 45% !important;
+                text-align: right !important;
+                min-height: 3rem;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                border-bottom: 1px solid #f1f5f9;
+                font-size: 0.9rem;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td:before {
+                position: absolute;
+                left: 1rem;
+                width: 40%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 700;
+                color: #64748b;
+                content: attr(data-label);
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+
+            td>div {
+                justify-content: flex-end;
+                width: 100%;
+            }
+
+            .action-buttons {
+                justify-content: flex-end;
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+        }
+
+        /* Loading & Modal Styles */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-blur {
+            filter: blur(4px);
+            pointer-events: none;
+            transition: filter 0.3s ease;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border: 1px solid #888;
+            width: 90%;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                padding: 1.25rem;
+                width: 95%;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #0f172a;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+
+            .sidebar,
+            .mobile-header,
+            .btn,
+            .nav-link,
+            #logoutBtn,
+            .menu-toggle,
+            .export-btn,
+            td:last-child,
+            th:last-child {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+            }
+
+            .section-view {
+                display: none !important;
+            }
+
+            .section-view.active {
+                display: block !important;
+            }
+
+            .data-table-container {
+                box-shadow: none !important;
+                padding: 0 !important;
+                overflow: visible !important;
+            }
+
+            table {
+                min-width: 100% !important;
+                border: 1px solid #e2e8f0 !important;
+            }
+
+            #report-header {
+                display: block !important;
+            }
+
+            header h2 {
+                margin: 2rem 0 !important;
+                text-align: center !important;
+                font-size: 2rem !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        #report-header {
+            display: none;
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .report-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .export-btn {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .export-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .refresh-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .header-actions {
+                flex-direction: row;
+                gap: 0.5rem;
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .refresh-btn,
+            .export-btn {
+                flex: 1;
+                justify-content: center;
+                min-width: 120px;
+                padding: 0.6rem;
+            }
+
+            header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 1.25rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Full Screen Loader -->
+    <div id="loading-overlay" class="active">
+        <div style="text-align:center;">
+            <i data-lucide="loader-2" class="spin"
+                style="color:var(--primary); width: 48px; height: 48px; animation: spin 1s linear infinite;"></i>
+            <h3 style="margin-top: 1rem; color: #1e293b;">Connecting to Database...</h3>
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <div class="admin-layout">
+        <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div
+                style="margin-bottom: 2rem; padding-left: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800;">DEVISH<span style="color:var(--primary)">.</span>
+                    </h3>
+                    <p style="color: #64748b; font-size: 0.8rem;">Admin Panel v2.0</p>
+                </div>
+                <i data-lucide="x" class="menu-toggle" style="color: white; display: none;"
+                    onclick="toggleSidebar()"></i>
+            </div>
+
+            <nav style="flex: 1;">
+                <a href="#" class="nav-link active" onclick="switchTab('dashboard', this)"><i
+                        data-lucide="layout-dashboard" size="20"></i> Dashboard</a>
+                <a href="#" class="nav-link" onclick="switchTab('orders', this)"><i data-lucide="shopping-bag"
+                        size="20"></i> Orders</a>
+                <a href="#" class="nav-link" onclick="switchTab('inventory', this)"><i data-lucide="box" size="20"></i>
+                    Inventory</a>
+                <a href="#" class="nav-link" onclick="switchTab('crm', this)"><i data-lucide="users" size="20"></i> CRM
+                    / Inquiries</a>
+                <a href="#" class="nav-link" onclick="switchTab('users', this)"><i data-lucide="user-plus"
+                        size="20"></i>
+                    Users</a>
+            </nav>
+
+            <div>
+                <a href="#" class="nav-link" id="logoutBtn" style="color: #ef4444;"><i data-lucide="log-out"
+                        size="20"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content loading-blur">
+            <!-- Report Header (Print Only) -->
+            <div id="report-header">
+                <div class="report-logo">
+                    <img src="../assets/images/logo.png" alt="Devish Logo" style="height: 60px;">
+                    <div>
+                        <h2 style="margin:0; font-size:1.8rem;">DEVISH <span style="color:#2563eb">.</span></h2>
+                        <p style="margin:0; color:#64748b;">Ingredients & Chemicals</p>
+                    </div>
+                </div>
+                <div style="color: #64748b; font-size: 0.95rem;">
+                    Floor 3rd, Flat No. 301, B Wing, Pushpanjali Residency, Phase 2,<br>
+                    Vedant Road, Energia Gym, Thane West, Thane - 400615,<br>
+                    Floor 3rd, Flat No. 301, B Wing Pushpanjali Residency, Phase 2, Vedant Road, Energia Gym, Thane
+                    West, Thane - 400615, Maharashtra, India | Contact: +91 7507082555
+                </div>
+                <div
+                    style="margin-top: 1rem; font-weight: 600; color: #0f172a; display: flex; justify-content: space-between;">
+                    <span>Report Title: <span id="report-title-display"></span></span>
+                    <span>Report Date: <span id="report-date-display"></span></span>
+                </div>
+            </div>
+
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <i data-lucide="menu" class="menu-toggle" onclick="toggleSidebar()"></i>
+                    <h3 style="font-size: 1.1rem; font-weight: 800; margin: 0;">DEVISH<span
+                            style="color:var(--primary)">.</span></h3>
+                </div>
+                <div id="mobileSectionTitle" style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Dashboard
+                </div>
+            </div>
+
+            <!-- DASHBOARD VIEW -->
+            <div id="view-dashboard" class="section-view active">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">Dashboard Overview</h2>
+                        <p style="color: #64748b;">Welcome back, <span id="adminNameDisplay">Admin</span></p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="refresh-btn" onclick="refreshCurrentSection()">
+                            <i data-lucide="refresh-cw" size="16"></i> Refresh
+                        </button>
+                        <button class="export-btn" onclick="exportData('Dashboard')">
+                            <i data-lucide="download" size="16"></i> Export Data
+                        </button>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon theme-green"><i data-lucide="indian-rupee"></i></div>
+                        </div>
+                        <p class="stat-label">Total Revenue</p>
+                        <h2 class="stat-value" id="val-revenue">₹--</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon theme-blue"><i data-lucide="shopping-cart"></i></div>
+                        </div>
+                        <p class="stat-label">Orders</p>
+                        <h2 class="stat-value" id="val-orders">--</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon theme-purple"><i data-lucide="users"></i></div>
+                        </div>
+                        <p class="stat-label">Users</p>
+                        <h2 class="stat-value" id="val-users">--</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon theme-slate"><i data-lucide="box"></i></div>
+                        </div>
+                        <p class="stat-label">Products</p>
+                        <h2 class="stat-value" id="val-products">--</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ORDERS VIEW -->
+            <div id="view-orders" class="section-view">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">Order Management</h2>
+                    <div class="header-actions">
+                        <button class="refresh-btn" onclick="refreshCurrentSection()">
+                            <i data-lucide="refresh-cw" size="16"></i> Refresh
+                        </button>
+                        <button class="export-btn" onclick="exportData('Orders')">
+                            <i data-lucide="download" size="16"></i> Export Data
+                        </button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- INVENTORY VIEW -->
+            <div id="view-inventory" class="section-view">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">Product Inventory</h2>
+                    <div class="header-actions">
+                        <button class="refresh-btn" onclick="refreshCurrentSection()">
+                            <i data-lucide="refresh-cw" size="16"></i> Refresh
+                        </button>
+                        <button class="export-btn" onclick="exportData('Inventory')">
+                            <i data-lucide="download" size="16"></i> Export Data
+                        </button>
+                        <button class="btn btn-primary" onclick="openProductModal()"
+                            style="padding: 0.5rem 1rem; border-radius: 8px; background: var(--primary); color: white; border: none; cursor: pointer;">+
+                            Add Product</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price (₹)</th>
+                                <th>CAS No.</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-body">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CRM VIEW -->
+            <div id="view-crm" class="section-view">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">Customer Inquiries</h2>
+                    <div class="header-actions">
+                        <button class="refresh-btn" onclick="refreshCurrentSection()">
+                            <i data-lucide="refresh-cw" size="16"></i> Refresh
+                        </button>
+                        <button class="export-btn" onclick="exportData('Inquiries')">
+                            <i data-lucide="download" size="16"></i> Export Data
+                        </button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table id="inquiries-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email/Phone</th>
+                                <th>Message</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiries-body">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- USERS VIEW -->
+            <div id="view-users" class="section-view">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="font-size: 1.6rem; font-weight: 800; color: #0f172a;">User Management</h2>
+                    <div class="header-actions">
+                        <button class="refresh-btn" onclick="refreshCurrentSection()">
+                            <i data-lucide="refresh-cw" size="16"></i> Refresh
+                        </button>
+                        <button class="export-btn" onclick="exportData('Users')">
+                            <i data-lucide="download" size="16"></i> Export Data
+                        </button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Joined Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-body">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3 style="font-size:1.4rem; font-weight:700;" id="productModalTitle">Add New Product</h3>
+                <i data-lucide="x" style="cursor:pointer;" onclick="closeProductModal()"></i>
+            </div>
+            <form id="productForm">
+                <input type="hidden" name="id" id="productId">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" name="name" class="form-control" required placeholder="e.g. Caustic Soda Flakes">
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select name="category" id="categorySelect" class="form-control" required>
+                            <!-- JS Populated -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Price (₹)</label>
+                        <input type="number" name="price" class="form-control" required placeholder="0.00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">CAS Number</label>
+                    <input type="text" name="cas" class="form-control" placeholder="e.g. 1310-73-2">
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                        <label class="form-label">Purity (%)</label>
+                        <input type="text" name="purity" class="form-control" placeholder="99.5%">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Grade</label>
+                        <input type="text" name="grade" class="form-control" placeholder="Pharma/Food/Industrial">
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="form-group">
+                        <label class="form-label">Appearance</label>
+                        <input type="text" name="appearance" class="form-control" placeholder="White Crystals">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Unit (kg/lt/pc)</label>
+                        <input type="text" name="unit" class="form-control" placeholder="kg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-control" rows="2"
+                        placeholder="Product details..."></textarea>
+                </div>
+                <div style="text-align:right; margin-top:2rem;">
+                    <button type="button" onclick="closeProductModal()" class="btn"
+                        style="background:#f1f5f9; color:#475569; margin-right:1rem;">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3 style="font-size:1.4rem; font-weight:700;">Order Details <span id="modalOrderId"
+                        style="color:var(--primary)"></span></h3>
+                <i data-lucide="x" style="cursor:pointer;" onclick="closeOrderModal()"></i>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-bottom:2rem;">
+                <div>
+                    <h4 style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Customer Info</h4>
+                    <p style="font-weight:600;" id="modalCustomerName">--</p>
+                    <p style="font-size:0.9rem;" id="modalCustomerEmail">--</p>
+                    <p style="font-size:0.9rem;" id="modalCustomerPhone">--</p>
+                    <p style="font-size:0.9rem; color:#64748b; margin-top:0.5rem;" id="modalAddress">--</p>
+                </div>
+                <div>
+                    <h4 style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Order Status</h4>
+                    <select id="modalStatusSelect" class="form-control" style="margin-bottom:1rem;">
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="updateOrderStatusAction()" style="width:100%">Update
+                        Status</button>
+                </div>
+            </div>
+
+            <h4 style="font-size:0.9rem; color:#64748b; margin-bottom:0.8rem;">Order Items</h4>
+            <div class="data-table-container"
+                style="padding:0; box-shadow:none; border:1px solid #f1f5f9; margin-bottom:1.5rem;">
+                <table id="modalItemsTable">
+                    <thead>
+                        <tr style="background:#f8fafc;">
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalItemsBody"></tbody>
+                </table>
+            </div>
+
+            <div style="text-align:right; font-size:1.2rem; font-weight:800;">
+                Total: <span id="modalOrderTotal" style="color:var(--primary)">₹0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                <h3 style="font-size:1.4rem; font-weight:700;">Edit User</h3>
+                <i data-lucide="x" style="cursor:pointer;" onclick="closeUserModal()"></i>
+            </div>
+            <form id="userForm">
+                <input type="hidden" name="id" id="userIdField">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" id="userNameField" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" id="userEmailField" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">New Password (leave blank to keep current)</label>
+                    <input type="password" name="password" id="userPasswordField" class="form-control">
+                </div>
+                <div style="text-align:right; margin-top:2rem;">
+                    <button type="button" onclick="closeUserModal()" class="btn"
+                        style="background:#f1f5f9; color:#475569; margin-right:1rem;">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="../js/api-client.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Use categories from existing project structure
+        const categories = {
+            yeast_enzymes: "Fermentation Dry Yeast And Enzyme Formulations",
+            tech_solutions: "Advanced Technical Solutions And Services",
+            equipments: "Sophisticated Advanced Equipments And Instruments",
+            manpower: "Skilled Man Power Supply"
+        };
+
+        // Populate Categories
+        // This assumes a 'categorySelect' element exists in the HTML, which is not provided in the context.
+        // If it doesn't exist, this block will not execute or will throw an error if catSelect is null.
+        const catSelect = document.getElementById('categorySelect');
+        if (catSelect) {
+            for (const [key, value] of Object.entries(categories)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = value;
+                catSelect.appendChild(option);
+            }
+        }
+
+        // Modal Functions
+        // Modal Functions
+        function openProductModal() {
+            const modal = document.getElementById('productModal');
+            if (modal) {
+                if (!document.getElementById('productId').value) {
+                    document.getElementById('productModalTitle').textContent = 'Add New Product';
+                }
+                modal.classList.add('active');
+            }
+        }
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            if (modal) {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    document.getElementById('productForm').reset();
+                    document.getElementById('productId').value = '';
+                }, 300);
+            }
+        }
+
+        // Order Modal Functions
+        let currentOrderId = null;
+        function closeOrderModal() { document.getElementById('orderModal').classList.remove('active'); }
+
+        async function openOrderModal(orderId) {
+            currentOrderId = orderId;
+            const modal = document.getElementById('orderModal');
+            modal.classList.add('active');
+
+            // Show loading state inside modal if needed, or just clear first
+            document.getElementById('modalItemsBody').innerHTML = '<tr><td colspan="4" style="text-align:center;">Loading...</td></tr>';
+
+            try {
+                const order = await ApiClient.call('getOrder', { id: orderId }, 'GET');
+                if (order.error) { alert(order.error); return; }
+
+                document.getElementById('modalOrderId').textContent = '#' + order.id;
+                document.getElementById('modalCustomerName').textContent = order.firstName + ' ' + order.lastName;
+                // document.getElementById('modalCustomerEmail').textContent = order.email || ''; // Add email to getOrder response if needed
+                document.getElementById('modalCustomerPhone').textContent = order.phone;
+                document.getElementById('modalAddress').textContent = `${order.address}, ${order.city}, ${order.zip}`;
+                document.getElementById('modalStatusSelect').value = order.status;
+                document.getElementById('modalOrderTotal').textContent = '₹' + order.total;
+
+                const tbody = document.getElementById('modalItemsBody');
+                tbody.innerHTML = order.items.map(item => `
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>₹${item.price}</td>
+                        <td>₹${item.quantity * item.price}</td>
+                    </tr>
+                `).join('');
+
+            } catch (e) { console.error(e); }
+        }
+
+        async function updateOrderStatusAction() {
+            if (!currentOrderId) return;
+            const status = document.getElementById('modalStatusSelect').value;
+            const btn = document.querySelector('#orderModal button');
+            const originalText = btn.textContent;
+            btn.textContent = 'Updating...';
+            btn.disabled = true;
+
+            try {
+                const res = await ApiClient.call('updateOrderStatus', { orderId: currentOrderId, status: status });
+                if (res.success) {
+                    alert('Order status updated!');
+                    loadOrders(); // Refresh background list
+                    closeOrderModal();
+                } else {
+                    alert('Error: ' + res.error);
+                }
+            } catch (e) { console.error(e); alert('Failed to update status'); }
+            finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Product Form Submit
+        const productForm = document.getElementById('productForm');
+        if (productForm) {
+            productForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = 'Saving...';
+                btn.disabled = true;
+
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                const isEdit = !!data.id;
+                data.action = isEdit ? 'updateProduct' : 'addProduct';
+
+                try {
+                    const result = await ApiClient.call(data.action, data);
+                    if (result.success) {
+                        alert(`Product ${isEdit ? 'updated' : 'added'} successfully!`);
+                        closeProductModal();
+                        e.target.reset();
+                        loadInventory();
+                    } else {
+                        alert('Error: ' + (result.message || result.error || 'Unknown error'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Failed to connect to server.');
+                } finally {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // User Form Submit
+        const userForm = document.getElementById('userForm');
+        if (userForm) {
+            userForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.textContent;
+                btn.textContent = 'Saving...';
+                btn.disabled = true;
+
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                data.action = 'updateUser';
+
+                try {
+                    const result = await ApiClient.call(data.action, data);
+                    if (result.success) {
+                        alert('User updated successfully!');
+                        closeUserModal();
+                        loadUsers();
+                    } else {
+                        alert('Error: ' + (result.message || result.error || 'Unknown error'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Failed to connect to server.');
+                } finally {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // Action Functions
+        async function deleteProduct(id) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+            try {
+                const res = await ApiClient.call('deleteProduct', { id: id });
+                if (res.success) { alert('Product deleted'); loadInventory(); }
+                else alert('Error: ' + res.error);
+            } catch (e) { console.error(e); }
+        }
+
+        function editProduct(id) {
+            const product = window.allProducts.find(p => p.id == id);
+            if (!product) return;
+
+            document.getElementById('productModalTitle').textContent = 'Edit Product';
+            document.getElementById('productId').value = product.id;
+            const form = document.getElementById('productForm');
+            form.elements['name'].value = product.name;
+            form.elements['category'].value = product.category;
+            form.elements['price'].value = product.price;
+            form.elements['cas'].value = product.cas_number || product.cas || '';
+            form.elements['description'].value = product.description || '';
+            form.elements['purity'].value = product.purity || '';
+            form.elements['grade'].value = product.grade || '';
+            form.elements['appearance'].value = product.appearance || '';
+            form.elements['unit'].value = product.unit || '';
+
+            openProductModal();
+        }
+
+        function openUserModal() { document.getElementById('userModal').classList.add('active'); }
+        function closeUserModal() { document.getElementById('userModal').classList.remove('active'); }
+
+        async function deleteUser(id) {
+            if (!confirm('Are you sure you want to delete this user?')) return;
+            try {
+                const res = await ApiClient.call('deleteUser', { id: id });
+                if (res.success) { alert('User deleted'); loadUsers(); }
+                else alert('Error: ' + res.error);
+            } catch (e) { console.error(e); }
+        }
+
+        async function editUser(id) {
+            const users = window.allUsers || [];
+            const user = users.find(u => u.id == id);
+            if (!user) return;
+
+            document.getElementById('userIdField').value = user.id;
+            document.getElementById('userNameField').value = user.name;
+            document.getElementById('userEmailField').value = user.email;
+            document.getElementById('userPasswordField').value = '';
+
+            openUserModal();
+        }
+
+        async function deleteInquiry(id) {
+            if (!confirm('Are you sure you want to delete this inquiry?')) return;
+            try {
+                const res = await ApiClient.call('deleteInquiry', { id: id });
+                if (res.success) {
+                    alert('Inquiry deleted successfully!');
+                    loadInquiries();
+                } else {
+                    alert('Error: ' + (res.message || res.error));
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        let currentActiveTab = 'dashboard';
+
+        async function refreshCurrentSection() {
+            const loading = document.getElementById('loading-overlay');
+            const mainContent = document.querySelector('.main-content');
+
+            loading.classList.add('active');
+            mainContent.classList.add('loading-blur');
+
+            try {
+                if (currentActiveTab === 'dashboard') await loadStats();
+                else if (currentActiveTab === 'orders') await loadOrders();
+                else if (currentActiveTab === 'inventory') await loadInventory();
+                else if (currentActiveTab === 'crm') await loadInquiries();
+                else if (currentActiveTab === 'users') await loadUsers();
+            } catch (e) {
+                console.error('Refresh failed', e);
+            } finally {
+                loading.classList.remove('active');
+                mainContent.classList.remove('loading-blur');
+                if (window.lucide) lucide.createIcons();
+            }
+        }
+
+        // Export Data Function
+        function exportData(sectionName) {
+            const reportDate = document.getElementById('report-date-display');
+            const reportTitle = document.getElementById('report-title-display');
+            const now = new Date();
+
+            if (reportDate) {
+                reportDate.textContent = now.toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            if (reportTitle) {
+                reportTitle.textContent = sectionName + " Report";
+            }
+
+            // Temporarily set document title for PDF filename
+            const originalTitle = document.title;
+            document.title = `Devish_Ingredients_${sectionName}_Report_${new Date().toISOString().split('T')[0]}`;
+
+            window.print();
+
+            // Restore title
+            document.title = originalTitle;
+        }
+
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const closeBtn = sidebar.querySelector('.menu-toggle');
+            if (sidebar.classList.contains('active')) {
+                closeBtn.style.display = 'block';
+            } else {
+                closeBtn.style.display = 'none';
+            }
+        }
+
+        // Tab Switching
+        async function switchTab(tabId, element) {
+            currentActiveTab = tabId;
+
+            // Update mobile title
+            const titles = { dashboard: 'Dashboard', orders: 'Orders', inventory: 'Inventory', crm: 'Customer Inquiries', users: 'Users' };
+            document.getElementById('mobileSectionTitle').textContent = titles[tabId] || 'Admin';
+
+            // Update Nav
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            element.classList.add('active');
+
+            // Update View
+            document.querySelectorAll('.section-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(`view-${tabId}`).classList.add('active');
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 968) toggleSidebar();
+
+            // Fetch Data based on tab
+            const loading = document.getElementById('loading-overlay');
+            const mainContent = document.querySelector('.main-content');
+
+            if (tabId === 'orders' || tabId === 'inventory' || tabId === 'crm' || tabId === 'users') {
+                loading.classList.add('active');
+                mainContent.classList.add('loading-blur');
+
+                if (tabId === 'orders') await loadOrders();
+                else if (tabId === 'inventory') await loadInventory();
+                else if (tabId === 'crm') await loadInquiries();
+                else if (tabId === 'users') await loadUsers();
+
+                loading.classList.remove('active');
+                mainContent.classList.remove('loading-blur');
+            }
+
+            // Re-initialize icons for new elements
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // Data Loaders
+        async function loadStats() {
+            try {
+                const stats = await ApiClient.call('getDashboardStats', {}, 'GET');
+                if (stats.error) return;
+
+                document.getElementById('val-revenue').textContent = '₹' + (stats.totalSales || 0).toLocaleString();
+                document.getElementById('val-orders').textContent = stats.totalOrders || 0;
+                document.getElementById('val-users').textContent = stats.totalUsers || 0;
+                document.getElementById('val-products').textContent = stats.totalProducts || 0;
+            } catch (e) {
+                console.error("Failed to load stats", e);
+            }
+        }
+
+        async function loadUsers() {
+            try {
+                const users = await ApiClient.call('getAllUsers', {}, 'GET');
+                const tbody = document.getElementById('users-body');
+                if (users.error) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:red;">${users.error}</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = users.length ? users.map(u => `
+                    <tr>
+                        <td data-label="ID">#${u.id}</td>
+                        <td data-label="Name"><div style="font-weight:600;">${u.name}</div></td>
+                        <td data-label="Email">${u.email}</td>
+                        <td data-label="Joined Date">${u.joinedDate}</td>
+                        <td data-label="Actions">
+                            <div class="action-buttons" style="display:flex; gap:8px;">
+                                <button onclick="editUser(${u.id})" style="padding: 4px 8px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer;"><i data-lucide="edit-2" size="14"></i></button>
+                                <button onclick="deleteUser(${u.id})" style="padding: 4px 8px; border: 1px solid #ef4444; color: white; border-radius: 4px; border: none; cursor: pointer;"><i data-lucide="trash-2" size="14"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('') : '<tr><td colspan="5" style="text-align:center;">No users found.</td></tr>';
+                window.allUsers = users; // Save globally
+                lucide.createIcons();
+            } catch (e) {
+                console.error('Load users failed', e);
+            }
+        }
+        async function loadOrders() {
+            try {
+                const orders = await ApiClient.call('getAllOrders', {}, 'GET'); // Requires backend update
+                const tbody = document.getElementById('orders-body');
+                if (orders.error) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">${orders.error}</td></tr>`; return; }
+
+                tbody.innerHTML = orders.length ? orders.map(o => `
+                    <tr>
+                        <td data-label="Order ID">#${o.id}</td>
+                        <td data-label="Customer"><div style="font-weight:600;">${o.customerName}</div></td>
+                        <td data-label="Date">${o.date}</td>
+                        <td data-label="Total">₹${o.total}</td>
+                        <td data-label="Status"><span class="status-badge ${o.status.toLowerCase() == 'completed' ? 'status-completed' : 'status-pending'}">${o.status}</span></td>
+                        <td data-label="Actions"><button onclick="openOrderModal(${o.id})" style="padding: 0.3rem 0.6rem; border: 1px solid #e2e8f0; border-radius: 6px; background: white; cursor: pointer;">View</button></td>
+                    </tr>
+                `).join('') : '<tr><td colspan="6" style="text-align:center;">No orders found.</td></tr>';
+            } catch (e) { console.error('Load orders failed', e); }
+        }
+
+        async function loadInventory() {
+            try {
+                const products = await ApiClient.getProducts();
+                const tbody = document.getElementById('inventory-body');
+
+                tbody.innerHTML = products.length ? products.map(p => `
+                    <tr>
+                        <td data-label="ID">${p.id}</td>
+                        <td data-label="Product">
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <img src="${p.image}" style="width:32px; height:32px; border-radius:4px; object-fit:cover;">
+                                <span style="font-weight:600;">${p.name}</span>
+                            </div>
+                        </td>
+                        <td data-label="Category">${p.category}</td>
+                        <td data-label="Price">₹${p.price}</td>
+                        <td data-label="CAS #">${p.cas_number || p.cas || '--'}</td>
+                        <td data-label="Actions">
+                            <div class="action-buttons" style="display:flex; gap:8px;">
+                                <button onclick="editProduct(${p.id})" style="padding: 4px 8px; border: 1px solid #e2e8f0; border-radius: 4px; background: white; cursor: pointer;"><i data-lucide="edit-2" size="14"></i></button>
+                                <button onclick="deleteProduct(${p.id})" style="padding: 4px 8px; border: 1px solid #ef4444; color: white; border-radius: 4px; border: none; cursor: pointer;"><i data-lucide="trash-2" size="14"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('') : '<tr><td colspan="6" style="text-align:center;">No products found.</td></tr>';
+                window.allProducts = products; // Save globally for editing
+                lucide.createIcons();
+            } catch (e) { console.error('Load inventory failed', e); }
+        }
+
+        async function loadInquiries() {
+            try {
+                const inquiries = await ApiClient.call('getInquiries', {}, 'GET');
+                const tbody = document.getElementById('inquiries-body');
+                if (inquiries.error) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">${inquiries.error}</td></tr>`; return; }
+
+                tbody.innerHTML = inquiries.length ? inquiries.map(i => `
+                    <tr>
+                        <td data-label="ID">#${i.id}</td>
+                        <td data-label="Name"><div style="font-weight:600;">${i.name}</div></td>
+                        <td data-label="Contact">${i.email || i.phone || i.phone_number || '--'}</td>
+                        <td data-label="Message" style="max-width:300px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${i.message}</td>
+                        <td data-label="Date">${i.date}</td>
+                        <td data-label="Actions">
+                            <div class="action-buttons">
+                                <button onclick="deleteInquiry(${i.id})" style="padding: 4px 8px; border: 1px solid #ef4444; color: white; border-radius: 4px; border: none; cursor: pointer;"><i data-lucide="trash-2" size="14"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('') : '<tr><td colspan="6" style="text-align:center;">No inquiries found.</td></tr>';
+                if (window.lucide) lucide.createIcons();
+            } catch (e) { console.error('Load inquiries failed', e); }
+        }
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Setup icons immediately
+            if (window.lucide) lucide.createIcons();
+
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const mainContent = document.querySelector('.main-content');
+
+            // Quick Auth Check
+            if (!AuthSystem.isLoggedIn() || localStorage.getItem('isAdmin') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.getElementById('adminNameDisplay').textContent = localStorage.getItem('adminName') || 'Admin';
+
+            // Function to dismiss loader safely
+            const hideLoader = () => {
+                loadingOverlay.classList.remove('active');
+                loadingOverlay.style.display = 'none';
+                mainContent.classList.remove('loading-blur');
+            };
+
+            // Safety timeout: dismiss loader after 5 seconds regardless of network
+            setTimeout(hideLoader, 5000);
+
+            // Fetch Stats and hide loader as soon as stats are ready (or fail)
+            try {
+                await loadStats();
+            } catch (e) {
+                console.error('Init failed', e);
+            } finally {
+                hideLoader();
+            }
+
+            // Background updates (don't block the UI)
+            document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                AuthSystem.logout();
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

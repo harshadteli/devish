@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Get Products API</title>
+</head>
+
+<body>
+    <h1>Testing get_products.jsp</h1>
+    <button onclick="testAPI()">Test API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Loading...</p>';
+
+            try {
+                const response = await fetch('get_products.jsp?cat=all');
+                const data = await response.json();
+
+                resultDiv.innerHTML = `
+                    <h2>API Response:</h2>
+                    <p><strong>Is Array:</strong> ${Array.isArray(data)}</p>
+                    <p><strong>Count:</strong> ${data.length || 'N/A'}</p>
+                    <p><strong>Has Error:</strong> ${data.error ? 'YES - ' + data.error : 'NO'}</p>
+                    <h3>First Product:</h3>
+                    <pre>${JSON.stringify(data[0], null, 2)}</pre>
+                    <h3>All Products:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

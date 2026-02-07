@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="keywords" content="Chemical Industry">
+    <meta name="subject" content="Chemicals">
+    <meta name="copyright" content="Devish Ingredients">
+    <meta name="language" content="English">
+    <meta name="robots" content="index,follow">
+    <meta name="revised" content="saturday,Feb 8th,2026,8:45 pm">
+    <meta name="abstract" content="HarshTech  specializes in custom Software Development and Web design solutions.">
+    <meta name="topic" content="Software Development">
+    <meta name="summary" content="HarshTech Provides innovative technology solutions for business">
+    <meta name="classification" content="business">
+    <meta name="author" content="Harshad Teli">
+    <meta name="author" content="harshadteli697@gmail.com">
+    <meta name="designer" content="Harshad Teli">
+    <meta name="reply-to" content="harshtech417@gmail.com">
+    <meta name="owner" content="Devish Ingredients">
+    <meta name="directory" content="Technology">
+    <meta name="pagename" content="Devish Ingredients Privated Limited">
+    <meta name="category" content="Web Development">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <link rel="shortcut icon" href="./IMAES/logo.png" type="image/x-icon">
+    <!-- Open Graph Tags (Whatsapp,Facebook,twitter,Instagram,Linkdin) -->
+    <meta name="og:title" content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="og:type" content="Chemical Industry">
+    <meta name="og:url" content="https://devishchemicals.vercel.app">
+    <meta name="og:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <meta name="og:site_name" content="Devish Ingredients">
+    <!-- For the twitter Card -->
+    <meta name="twitter:Card" content="summary_large_image">
+    <meta name="twitter:title"
+        content="Fermentation Booster Enzymes Supplier, Condensate Water Recycle Chemicals in Thane">
+    <meta name="twitter:description"
+        content="DEVISH Ingredients is an ISO 9001:2015 certified, MSME-registered company based in Thane. Since 2021, we’ve provided innovative products and technical solutions to maximize your yields.">
+    <meta name="twitter:image"
+        content="https://raw.githubusercontent.com/harshadteli/devish/refs/heads/main/1769434756823.png">
+    <title>Devish AI Assistant | Advanced Chemical Intelligence</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gemini-bg: #f8fafc;
+            --gemini-sidebar: #ffffff;
+            --gemini-chat-bg: #ffffff;
+            --gemini-primary: #4f46e5;
+            --gemini-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --gemini-text: #1e293b;
+            --gemini-text-dim: #64748b;
+        }
+
+        body {
+            background: var(--gemini-bg);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            height: 100dvh;
+            /* Mobile viewport fix */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        .ai-layout {
+            display: flex;
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Sidebar Styling */
+        .ai-sidebar {
+            width: 300px;
+            background: var(--gemini-sidebar);
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .new-chat-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--gemini-text);
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .new-chat-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 1rem;
+        }
+
+        .history-item {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: var(--gemini-text-dim);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-item:hover {
+            background: #f8fafc;
+            color: var(--gemini-text);
+        }
+
+        .history-item.active {
+            background: #eef2ff;
+            color: var(--gemini-primary);
+            font-weight: 500;
+        }
+
+        /* Main Chat Area */
+        .ai-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--gemini-chat-bg);
+            position: relative;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .chat-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 15% 2rem 15%;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 1200px) {
+            .chat-scroll {
+                padding: 2rem 10% 2rem 10%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-scroll {
+                padding: 1.5rem 0.8rem 1rem 0.8rem;
+                gap: 1.2rem;
+                padding-bottom: 0;
+            }
+
+            .ai-sidebar {
+                position: absolute;
+                left: -300px;
+                top: 0;
+                height: 100%;
+                box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .ai-sidebar.open {
+                left: 0;
+            }
+
+            /* Static Input for Mobile */
+            .input-container {
+                position: static;
+                transform: none;
+                width: 95%;
+                margin: 0 auto 10px auto;
+                bottom: auto;
+                left: auto;
+                box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+                z-index: 50;
+            }
+
+            .chat-input {
+                padding: 0.8rem 1rem;
+                font-size: 16px;
+                /* Prevent zoom on iOS */
+            }
+
+            .ai-main {
+                display: flex;
+                flex-direction: column;
+            }
+
+
+            .message {
+                gap: 0.8rem;
+            }
+
+            .avatar {
+                width: 32px;
+                height: 32px;
+            }
+
+            .message-content {
+                max-width: 85%;
+                font-size: 0.95rem;
+            }
+
+            .product-card-adv {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+
+            .p-image-adv {
+                height: 140px;
+            }
+
+            .welcome-h2 {
+                font-size: 1.6rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .spec-mini-grid {
+                grid-template-columns: 1fr !important;
+                gap: 8px;
+            }
+
+            .p-badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+
+            .p-meta {
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-bottom: 0.8rem;
+            }
+
+            .p-info-adv h3 {
+                font-size: 1.1rem;
+            }
+
+            .p-info-adv .btn {
+                width: 100%;
+                text-align: center;
+                display: block;
+                padding: 0.8rem;
+            }
+
+            .action-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .product-card-adv .p-info-adv p {
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Message Bubbles */
+        .message {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .avatar.bot {
+            background: var(--gemini-gradient);
+            color: white;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        .avatar.user {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .message-content {
+            max-width: 80%;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--gemini-text);
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .message.user .message-content {
+            background: #f8fafc;
+            padding: 1.2rem;
+            border-radius: 20px 4px 20px 20px;
+        }
+
+        .product-card-adv .p-info-adv p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-clamp: 3;
+        }
+
+        /* Input Container */
+        .input-container {
+            position: static;
+            transform: none;
+            width: 70%;
+            max-width: 800px;
+            margin: 10px auto 30px auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            z-index: 50;
+        }
+
+        .input-container:focus-within {
+            border-color: var(--gemini-primary);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            font-family: inherit;
+            background: transparent;
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 8px;
+            padding-right: 10px;
+        }
+
+        .action-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gemini-text-dim);
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .action-btn:hover {
+            background: #f1f5f9;
+            color: var(--gemini-primary);
+        }
+
+        .send-btn {
+            background: var(--gemini-primary);
+            color: white;
+        }
+
+        .send-btn:hover {
+            background: #4338ca;
+            color: white;
+        }
+
+        /* Advanced Product Card in Chat */
+        .product-card-adv {
+            background: white;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .product-card-adv:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--gemini-primary);
+        }
+
+        .p-image-adv {
+            width: 100%;
+            height: 180px;
+            background: #f8fafc;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .p-info-adv h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--gemini-text);
+        }
+
+        .p-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .p-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .spec-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-mini-item {
+            font-size: 0.85rem;
+            color: var(--gemini-text-dim);
+        }
+
+        .spec-mini-item strong {
+            color: var(--gemini-text);
+        }
+
+        /* Gemini Glow Loader */
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .input-container {
+                width: 85%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-mobile-toggle {
+                display: flex !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" style="position: static; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Devish Logo" height="40px">
+                    <div>
+                        <span class="logo-main" style="color: var(--text-light); font-size: 1.3rem;">DEVISH <span
+                                style="color:var(--primary)">.</span></span>
+                    </div>
+                </a>
+
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <button class="action-btn sidebar-mobile-toggle" onclick="toggleSidebar()"
+                        style="display: none; background: #f1f5f9; width: 40px; height: 40px;">
+                        <i data-lucide="menu"></i>
+                    </button>
+                    <div style="display: flex; flex-direction: column;">
+                        <span id="ai-status"
+                            style="font-size: 0.75rem; font-weight: 600; color: #10b981; display:flex; align-items:center; gap:6px;">
+                            <span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></span>
+                            Online
+                        </span>
+                    </div>
+                    <a href="index.html" class="btn glass" style="padding: 0.4rem 0.8rem; font-size:0.8rem;">Exit</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ai-layout">
+        <!-- Sidebar -->
+        <aside class="ai-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div style="font-weight: 700; color: var(--gemini-text)">Recent Chats</div>
+                <i data-lucide="panel-left-close" style="cursor: pointer; color: var(--gemini-text-dim);"
+                    onclick="toggleSidebar()" size="18"></i>
+            </div>
+            <div style="padding: 0 1rem;">
+                <button class="new-chat-btn" onclick="clearHistory()">
+                    <i data-lucide="plus" size="18"></i> New Chat
+                </button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- Chat history items -->
+                <div class="history-item active">
+                    <i data-lucide="message-square" size="16"></i> Current Session
+                </div>
+            </div>
+
+            <div style="padding: 1.5rem; border-top: 1px solid #f1f5f9;">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.8rem;">PRODUCT SHORTCUTS</div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="history-item" onclick="promptAI('Show me yeast products')"><i
+                            data-lucide="flask-conical" size="14"></i> Yeast Catalog</div>
+                    <div class="history-item" onclick="promptAI('Technical solutions for brewing')"><i data-lucide="zap"
+                            size="14"></i> Tech Support</div>
+                    <div class="history-item" onclick="promptAI('How to order chemicals')"><i data-lucide="help-circle"
+                            size="14"></i> Ordering Guide</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="ai-main">
+            <div class="chat-scroll" id="chat-messages">
+                <!-- Welcome Message -->
+                <div class="message">
+                    <div class="avatar bot"><i data-lucide="bot" size="24"></i></div>
+                    <div class="message-content">
+                        <h2 class="welcome-h2"
+                            style="font-size: 2.5rem; margin-bottom: 1.5rem; background: var(--gemini-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                            Hello, I'm Devish AI.</h2>
+                        <p style="color: var(--gemini-text-dim); font-size: 1.2rem; margin-bottom: 2rem;">
+                            I'm your advanced chemical intelligence assistant. I can help you with technical data,
+                            product discovery, and procurement logistics.
+                        </p>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div class="glass"
+                                style="padding: 1.5rem; border-radius: 16px; cursor: pointer; transition: 0.3s;"
+                                onclick="promptAI('Show all enzymes')">
+                                <i data-lucide="flask-round" style="color: #4f46e5; margin-bottom: 10px;"></i>
+                                <div style="font-weight: 600; font-size: 0.95rem;">Explore Enzymes</div>
+                            </div>
+                            <div class="glass"
+                                style="padding: 1.5rem; border-radius: 16px; cursor: pointer; transition: 0.3s;"
+                                onclick="promptAI('Latest chemical prices')">
+                                <i data-lucide="trending-up" style="color: #10b981; margin-bottom: 10px;"></i>
+                                <div style="font-weight: 600; font-size: 0.95rem;">Check Pricing</div>
+                            </div>
+                            <div class="glass"
+                                style="padding: 1.5rem; border-radius: 16px; cursor: pointer; transition: 0.3s;"
+                                onclick="promptAI('Technical specs for brewing')">
+                                <i data-lucide="file-text" style="color: #f59e0b; margin-bottom: 10px;"></i>
+                                <div style="font-weight: 600; font-size: 0.95rem;">Technical Data</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Enter a prompt here...">
+                <div class="input-actions">
+                    <button class="action-btn" title="Add Image"><i data-lucide="image" size="20"></i></button>
+                    <button class="action-btn" title="Technical File"><i data-lucide="paperclip" size="20"></i></button>
+                    <button id="send-btn" class="action-btn send-btn"><i data-lucide="arrow-right"
+                            size="22"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Speech Utility -->
+    <script>
+        const Speech = {
+            speak(text) {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.rate = 1.1;
+                    utterance.pitch = 1.0;
+                    const voices = window.speechSynthesis.getVoices();
+                    const voice = voices.find(v => v.name.includes('Google') || v.name.includes('Female')) || voices[0];
+                    if (voice) utterance.voice = voice;
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+        };
+    </script>
+
+
+    <script src="config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+        let products = []; // Initialize globally to avoid ReferenceError
+        let isTyping = false;
+
+        async function initAI() {
+            // Load products if not already loaded
+            if (products.length === 0) {
+                if (typeof ApiClient !== 'undefined') {
+                    const data = await ApiClient.getProducts();
+                    if (data && !data.error) products = data;
+                } else {
+                    console.error('ApiClient not loaded');
+                }
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function promptAI(text) {
+            document.getElementById('chat-input').value = text;
+            handleSend();
+        }
+
+        function addMessage(sender, text, productData = null) {
+            const container = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+
+            const isBot = sender === 'bot';
+            const avatarHtml = `<div class="avatar ${sender}"><i data-lucide="${isBot ? 'bot' : 'user'}" size="20"></i></div>`;
+
+            let contentHtml = `<div class="message-content">
+                <div class="txt-body">${text}</div>
+                ${productData ? renderAdvancedProducts(productData) : ''}
+            </div>`;
+
+            msgDiv.innerHTML = isBot ? avatarHtml + contentHtml : contentHtml + avatarHtml;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+            lucide.createIcons();
+
+            if (isBot && typeof Speech !== 'undefined') Speech.speak(text);
+        }
+
+        function renderAdvancedProducts(items) {
+            if (!Array.isArray(items)) return '';
+            return items.map(p => `
+                <div class="product-card-adv">
+                    <div class="p-image-adv">
+                        <img src="${p.image ? (p.image.startsWith('http') ? p.image : '../' + p.image) : '../assets/images/product-placeholder.png'}" style="max-width:80%; max-height:80%; object-fit:contain;" onerror="this.src='../assets/images/product-placeholder.png'">
+                    </div>
+                    <div class="p-info-adv">
+                        <div class="p-meta">
+                            <span class="p-badge" style="background:#eef2ff; color:#4f46e5;">${p.category}</span>
+                            <span class="p-badge" style="background:#f0fdf4; color:#10b981;">In Stock</span>
+                        </div>
+                        <h3>${p.name}</h3>
+                        <p style="font-size:0.9rem; color:#64748b; margin-bottom:1rem;">${p.description}</p>
+                        <div class="spec-mini-grid">
+                            <div class="spec-mini-item">CAS: <strong>${p.cas || 'N/A'}</strong></div>
+                            <div class="spec-mini-item">Grade: <strong>${p.grade || 'Industrial'}</strong></div>
+                            <div class="spec-mini-item">Unit: <strong>${p.unit || 'kg'}</strong></div>
+                            <div class="spec-mini-item">Price: <strong>${p.price ? '₹' + p.price : 'Request Quote'}</strong></div>
+                        </div>
+                        <a href="product-detail.html?id=${p.id}" class="btn btn-primary" style="padding:0.6rem 1.2rem; display:inline-block; font-size:0.85rem;">View Full Analysis</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function handleSend() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text || isTyping) return;
+
+            input.value = '';
+            addMessage('user', text);
+
+            // Show Typing Indicator
+            isTyping = true;
+            const container = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing-msg';
+            typingDiv.innerHTML = `
+                <div class="avatar bot"><i data-lucide="bot" size="20"></i></div>
+                <div class="typing-indicator">
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+            lucide.createIcons();
+
+            // Simulate Intelligence
+            setTimeout(() => {
+                typingDiv.remove();
+                isTyping = false;
+                processResponse(text);
+            }, 1500);
+        }
+
+        function processResponse(msg) {
+            const query = msg.toLowerCase();
+            let response = "I've analyzed your request against our current global inventory. ";
+            let filtered = [];
+
+            if (products.length === 0) {
+                addMessage('bot', "I'm still loading the product catalog. Please try again in a moment.");
+                return;
+            }
+
+            if (query.includes('yeast')) {
+                response += "Here are our high-purity fermentation yeast formulations:";
+                filtered = products.filter(p => p.category === 'yeast_enzymes');
+            } else if (query.includes('tech') || query.includes('solution')) {
+                response += "Our technical solutions package includes specialized onsite support and analysis:";
+                filtered = products.filter(p => p.category === 'tech_solutions');
+            } else if (query.includes('equipment') || query.includes('instrument')) {
+                response += "We provide state-of-the-art laboratory and industrial equipment:";
+                filtered = products.filter(p => p.category === 'equipments');
+            } else if (query.includes('all') || query.includes('show') || query.includes('list')) {
+                response += "Here is a snapshot of our diverse product portfolio across bio-chemicals and technical services:";
+                filtered = products.slice(0, 5);
+            } else {
+                // Search by name
+                filtered = products.filter(p =>
+                    query.includes(p.name.toLowerCase()) ||
+                    p.name.toLowerCase().includes(query)
+                ).slice(0, 3);
+
+                if (filtered.length > 0) {
+                    response += `I found ${filtered.length} precise matches for ${msg}:`;
+                } else {
+                    response = "I couldn't find a specific data point for that request. Try asking about 'Yeast', 'Enzymes', or 'Technical Services'.";
+                }
+            }
+
+            addMessage('bot', response, filtered.length > 0 ? filtered : null);
+        }
+
+        document.getElementById('send-btn').addEventListener('click', handleSend);
+        document.getElementById('chat-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+
+        function clearHistory() {
+            if (confirm('Start a fresh session?')) {
+                location.reload();
+            }
+        }
+
+        // Run init
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAI);
+        } else {
+            initAI();
+        }
+    </script>
+</body>
+
+</html>
